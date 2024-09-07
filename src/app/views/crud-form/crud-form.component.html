@@ -2,18 +2,24 @@
   <div class="main-width">
     <div class="card">
       <section class="section-title">
-        <h3>Cadastrar Profissional</h3>
+        <h3>Cadastrar Produto</h3>
       </section>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="grid-um">
           <mat-form-field appearance="outline" class="span8">
-            <mat-label>Descrição<span class="required">*</span></mat-label>
+            <mat-label>Descrição<span class="required"></span></mat-label>
             <input matInput formControlName="describe" />
+            <mat-error *ngIf="form.get('describe')?.hasError('required')">
+              A descrição é obrigatória
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="span4">
-            <mat-label>Preço<span class="required">*</span></mat-label>
+            <mat-label>Preço<span class="required"></span></mat-label>
             <input matInput formControlName="price" />
+            <mat-error *ngIf="form.get('price')?.hasError('required')">
+              O preço é obrigatório
+            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="span4">
@@ -28,6 +34,9 @@
               [for]="picker"
             ></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.get('expiry_date')?.hasError('required')">
+              A validade é obrigatória
+            </mat-error>
           </mat-form-field>
         </div>
 
@@ -44,7 +53,7 @@
             </button>
           </div>
 
-          <div *ngIf="!isReadOnly">
+          <div>
             <button mat-fab extended color="primary" type="submit">
               <mat-icon>check</mat-icon>
               Salvar Cadastro

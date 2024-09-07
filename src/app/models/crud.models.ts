@@ -6,3 +6,20 @@ export interface IProduct {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface IProductResponse {
+  data?: IProduct;
+  message: string;
+  statusCode: number;
+}
+
+export interface IError {
+  error: IProductError;
+  message: string;
+  statusCode: number;
+}
+
+export interface IProductError {
+  message: string;
+  statusCode: number;
+}

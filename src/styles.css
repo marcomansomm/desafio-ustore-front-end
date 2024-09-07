@@ -6,5 +6,36 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, sans-serif;
+}
+
+input,
+textarea {
+  background-color: #ffffff; /* Fundo branco */
+  color: #000000; /* Texto preto */
+  border: 1px solid #ddd; /* Borda cinza clara */
+  padding: 10px; /* Espaçamento interno */
+  border-radius: 4px; /* Bordas arredondadas */
+}
+
+input::placeholder {
+  color: #666666; /* Cor do placeholder mais escura */
+}
+
+input:focus,
+textarea:focus {
+  border-color: #6200ea; /* Cor roxa ao focar no campo */
+  outline: none; /* Remove o outline padrão */
+}
+
+/* Para garantir que o input tenha largura completa */
+mat-form-field {
+  width: 100%; /* Garante que os campos ocupem a largura total do contêiner */
+}
+
+/* Ajustar estilo dos campos desabilitados */
+input:disabled,
+textarea:disabled {
+  background-color: #f0f0f0; /* Fundo cinza claro para campos desabilitados */
+  color: #999999; /* Texto mais claro para campos desabilitados */
 }

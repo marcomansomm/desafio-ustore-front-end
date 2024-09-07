@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IProduct } from '../models/crud.models';
+import { IProduct, IProductResponse } from '../models/crud.models';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs';
 
@@ -12,28 +12,35 @@ export class CrudListServices {
   private path = 'http://localhost:3001/';
   constructor(private httpClient: HttpClient) {}
 
-  getProducts() {
-    return this.httpClient.get<IProduct[]>(this.path + 'products');
+  getProducts(page: number, pageSize: number): Observable<IProductResponse[]> {
+    return this.httpClient.get<IProductResponse[]>(
+      this.path + 'products' + '?page=' + page + '&limit=' + pageSize
+    );
   }
 
-  getProduct(id: string) {
-    return this.httpClient.get<IProduct>(this.path + 'products/' + id);
+  getProduct(id: string): Observable<IProductResponse> {
+    return this.httpClient.get<IProductResponse>(this.path + 'products/' + id);
   }
-  updateProduct(id: string, product: IProduct): Observable<IProduct> {
+  updateProduct(id: string, product: IProduct): Observable<IProductResponse> {
     if (!id) {
       console.error('ID inválido para atualização');
       return throwError(() => new Error('ID inválido para atualização'));
     }
 
-    return this.httpClient.patch<IProduct>(
+    return this.httpClient.patch<IProductResponse>(
       `${this.path}products/${id}`,
       product
     );
   }
-  deleteProduct(id: string) {
-    return this.httpClient.delete(this.path + 'products/' + id);
+  deleteProduct(id: string): Observable<IProductResponse> {
+    return this.httpClient.delete<IProductResponse>(
+      this.path + 'products/' + id
+    );
   }
-  createProduct(Products: any) {
-    return this.httpClient.post(this.path + 'products', Products);
+  createProduct(Products: any): Observable<IProductResponse> {
+    return this.httpClient.post<IProductResponse>(
+      this.path + 'products',
+      Products
+    );
   }
 }

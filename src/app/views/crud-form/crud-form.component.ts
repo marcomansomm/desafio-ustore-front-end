@@ -9,6 +9,7 @@ import {
   MatCheckboxChange,
   MatCheckboxModule,
 } from '@angular/material/checkbox';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +21,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { CrudListServices } from '../../services/crud.service';
+import {
+  IError,
+  IProductError,
+  IProductResponse,
+} from '../../models/crud.models';
 
 @Component({
   selector: 'app-crud-form',
@@ -45,17 +51,14 @@ import { CrudListServices } from '../../services/crud.service';
 export class CrudFormComponent {
   form: FormGroup = new FormGroup({});
   productId: string | null = null;
-  isReadOnly = false;
   constructor(
+    private snackBar: MatSnackBar,
     private router: Router,
     private crudServices: CrudListServices,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    if (this.route.snapshot.paramMap.get('mode') === 'view') {
-      this.isReadOnly = true;
-    }
     this.form = new FormGroup({
       describe: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
@@ -70,42 +73,28 @@ export class CrudFormComponent {
       });
     }
   }
-  onCheckboxChange(event: MatCheckboxChange, day: string) {
-    const days = this.form.get('actions')?.value as string[];
-    if (event.checked) {
-      days.push(day);
-    } else {
-      const index = days.indexOf(day);
-      if (index > -1) {
-        days.splice(index, 1);
-      }
-    }
-    this.form.get('actions')?.setValue(days);
-  }
 
-  isDaySelected(day: string): boolean {
-    return this.form.get('actions')?.value.includes(day);
-  }
-
-  isActiveSelected(status: boolean): boolean {
-    if (this.form.get('status')?.value === status) {
-      return true;
-    }
-    return false;
+  showNotification(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 
   onSubmit(): void {
-    if (this.isReadOnly) return;
     if (this.form && this.form.valid) {
       const formData = this.form.value;
       if (this.productId) {
         this.crudServices.updateProduct(this.productId, formData).subscribe({
-          next: (response) => {
+          next: (response: IProductResponse) => {
+            this.showNotification(response.message, 'Fechar');
             console.log('Atualização concluída com sucesso!', response);
             this.router.navigate(['/crud-list']);
           },
-          error: (error) => {
-            console.error('Erro ao atualizar o profissional', error);
+          error: (error: IError) => {
+            this.showNotification(error.error.message, 'Fechar');
+            console.error('Erro ao atualizar o produto', error);
           },
           complete: () => {
             console.log('Subscription complete');
@@ -113,12 +102,14 @@ export class CrudFormComponent {
         });
       } else {
         this.crudServices.createProduct(formData).subscribe({
-          next: (response) => {
+          next: (response: IProductResponse) => {
+            this.showNotification(response.message, 'Fechar');
             console.log('Cadastro realizado com sucesso!', response);
             this.router.navigate(['/crud-list']);
           },
-          error: (error) => {
-            console.error('Erro ao cadastrar o profissional', error);
+          error: (error: IError) => {
+            this.showNotification(error.error.message, 'Fechar');
+            console.error('Erro ao cadastrar o produto', error);
           },
           complete: () => {
             console.log('Subscription complete');
