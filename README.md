@@ -17,8 +17,8 @@ Antes de rodar esta aplicação, você precisará ter instalado em sua máquina:
 Comece clonando o repositório em sua máquina local:
 
 ```bash
-git clone https://github.com/seuusuario/desafio-ustore-frontend.git
-cd desafio-ustore-frontend
+git clone https://github.com/marcomansomm/desafio-ustore-front-end.git
+cd desafio-ustore-front-end
 ```
 
 ### 2. Instalando Dependências
