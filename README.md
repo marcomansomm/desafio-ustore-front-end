@@ -1,27 +1,48 @@
-# DesafioUstoreFrontEnd
+# Desafio UStore - Aplicação Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
+Esta aplicação é o frontend do Desafio UStore, uma interface desenvolvida com [Angular](https://angular.io/), que consome uma API REST para gerenciamento de produtos.
 
-## Development server
+## Pré-requisitos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Antes de rodar esta aplicação, você precisará ter instalado em sua máquina:
 
-## Code scaffolding
+- [Node.js](https://nodejs.org/en/) (v18.x ou superior)
+- [Angular CLI](https://angular.io/cli) (v14.x ou superior)
+- [Docker](https://www.docker.com/) (opcional, para rodar com Docker)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Instalação
 
-## Build
+### 1. Clonando o Repositório
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Comece clonando o repositório em sua máquina local:
 
-## Running unit tests
+```bash
+git clone https://github.com/seuusuario/desafio-ustore-frontend.git
+cd desafio-ustore-frontend
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 2. Instalando Dependências
 
-## Running end-to-end tests
+Instale as dependências da aplicação Angular com o comando:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm install
+```
 
-## Further help
+## 3. Rodando a Aplicação
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Para rodar a aplicação Angular localmente, utilize o comando:
+
+```bash
+npm start
+```
+
+A aplicação ficará disponível em http://localhost:4200.
+
+## Tecnologias Utilizadas
+
+- **Angular** - Framework para construção do frontend.
+- **TypeScript** - Linguagem de programação utilizada para o desenvolvimento da aplicação Angular.
+- **HTML/CSS** - Para a construção da interface do usuário.
+- **REST API** - Comunicação com a API desenvolvida em [NestJS](https://nestjs.com/).
+- **Docker** (opcional) - Para rodar a aplicação em contêineres.
