@@ -62,6 +62,7 @@ export class CrudFormComponent {
     this.form = new FormGroup({
       describe: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
+      quantity: new FormControl('', [Validators.required]),
       expiry_date: new FormControl('', [Validators.required]),
     });
 

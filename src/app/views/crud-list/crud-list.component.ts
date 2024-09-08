@@ -42,6 +42,7 @@ export class CrudListComponent implements AfterViewInit {
     'id',
     'describe',
     'price',
+    'quantity',
     'expiry_date',
     'actions',
   ];

@@ -23,6 +23,14 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="span4">
+            <mat-label>Quantidade<span class="required"></span></mat-label>
+            <input matInput formControlName="quantity" />
+            <mat-error *ngIf="form.get('quantity')?.hasError('required')">
+              A quantidade é obrigatório
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="span4">
             <mat-label>Data de Validade</mat-label>
             <input
               matInput

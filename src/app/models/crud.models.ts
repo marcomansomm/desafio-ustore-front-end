@@ -2,6 +2,7 @@ export interface IProduct {
   id: number;
   describe: string;
   price: number;
+  quantity: number;
   expiry_date: Date;
   createdAt: Date;
   updatedAt: Date;
